@@ -1,15 +1,18 @@
 from flask import Flask
+from data import get_data
+
 
 sicei = Flask(__name__)
 
-alumnos = [
-    {"nombre": "Desiree Correa", "matricula": "16004107"},
-    {"nombre": "Jane Doe", "matricula": "140053173"},
-    {"nombre": "John Doe", "matricula": "170004317"},
-    {"nombre": "Jan Jansen", "matricula": "17000907"},
-    {"nombre": "Erika Mustermann", "matricula": "192004317"},
-]
+@sicei.route("/")
+def index():
+    return 'Welcome to sicei application'
 
-@sicei.get("/alumnos")
+@sicei.route("/alumnos")
 def get_alumnos():
-    return {"alumnos": alumnos}
+    data = get_data()
+    return {"alumnos": data}
+
+
+if __name__ == "__main__":
+    sicei.run()
